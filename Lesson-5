@@ -1,0 +1,60 @@
+public class Employee {
+    private String fullName;
+    private String position;
+    private String email;
+    private String phone;
+    private double salary;
+    private int age;
+
+    public Employee(String fullName, String position, String email, String phone, double salary, int age) {
+        this.fullName = fullName;
+        this.position = position;
+        this.email = email;
+        this.phone = phone;
+        this.salary = salary;
+        this.age = age;
+    }
+
+    public void printInfo() {
+        System.out.println("Сотрудник: " + fullName);
+        System.out.println("Должность: " + position);
+        System.out.println("Email: " + email);
+        System.out.println("Телефон: " + phone);
+        System.out.println("Зарплата: " + salary);
+        System.out.println("Возраст: " + age);
+    }
+
+    public static void main(String[] args) {
+        Employee[] employees = new Employee[5];
+        employees[0] = new Employee("Иван Иванов", "Инженер", "ivan@example.com", "+7-900-123-45-67", 60000, 35);
+        employees[1] = new Employee("Петр Петров", "Менеджер", "petr@example.com", "+7-901-234-56-78", 50000, 40);
+        employees[2] = new Employee("Сидор Сидоров", "Аналитик", "sidor@example.com", "+7-902-345-67-89", 70000, 45);
+        employees[3] = new Employee("Анна Смирнова", "Дизайнер", "anna@example.com", "+7-903-456-78-90", 55000, 32);
+        employees[4] = new Employee("Екатерина Иванова", "Разработчик", "ekaterina@example.com", "+7-904-567-89-01", 80000, 28);
+
+        for (Employee employee : employees) {
+            employee.printInfo();
+            System.out.println();
+        }
+    }
+}
+
+class Park {
+    class Attraction {
+        private String name;
+        private String workingHours;
+        private double price;
+
+        public Attraction(String name, String workingHours, double price) {
+            this.name = name;
+            this.workingHours = workingHours;
+            this.price = price;
+        }
+
+        public void printAttractionInfo() {
+            System.out.println("Аттракцион: " + name);
+            System.out.println("Время работы: " + workingHours);
+            System.out.println("Стоимость: " + price + " руб.");
+        }
+    }
+}
