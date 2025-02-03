@@ -1,0 +1,111 @@
+class Animal {
+    String name;
+    static int animalCount = 0;
+
+    Animal(String name) {
+        this.name = name;
+        animalCount++;
+    }
+
+    void run(int distance) {
+    }
+
+    void swim(int distance) {
+    }
+}
+
+class Dog extends Animal {
+    static int dogCount = 0;
+
+    Dog(String name) {
+        super(name);
+        dogCount++;
+    }
+
+    void run(int distance) {
+        if (distance <= 500) {
+            System.out.println(name + " пробежал " + distance + " м.");
+        } else {
+            System.out.println(name + " не смог пробежать " + distance + " м.");
+        }
+    }
+
+    void swim(int distance) {
+        if (distance <= 10) {
+            System.out.println(name + " проплыл " + distance + " м.");
+        } else {
+            System.out.println(name + " не смог проплыть " + distance + " м.");
+        }
+    }
+}
+
+class Cat extends Animal {
+    static int catCount = 0;
+    boolean satiety = false;
+
+    Cat(String name) {
+        super(name);
+        catCount++;
+    }
+
+    void run(int distance) {
+        if (distance <= 200) {
+            System.out.println(name + " пробежал " + distance + " м.");
+        } else {
+            System.out.println(name + " не смог пробежать " + distance + " м.");
+        }
+    }
+
+    void swim(int distance) {
+        System.out.println(name + " не умеет плавать.");
+    }
+
+    void eat(Bowl bowl, int foodAmount) {
+        if (bowl.foodAmount >= foodAmount) {
+            bowl.foodAmount -= foodAmount;
+            satiety = true;
+            System.out.println(name + " покушал и теперь сыт.");
+        } else {
+            System.out.println(name + " не смог покушать, недостаточно еды в миске.");
+        }
+    }
+}
+
+class Bowl {
+    int foodAmount;
+
+    Bowl(int foodAmount) {
+        this.foodAmount = foodAmount;
+    }
+
+    void addFood(int amount) {
+        foodAmount += amount;
+        System.out.println("Добавлено " + amount + " еды в миску. Текущая еда: " + foodAmount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog("Бобик");
+        dog.run(150);
+        dog.swim(5);
+
+        Cat[] cats = {new Cat("Мурзик"), new Cat("Барсик"), new Cat("Васька")};
+        Bowl bowl = new Bowl(20);
+
+        for (Cat cat : cats) {
+            cat.eat(bowl, 8);
+        }
+
+        for (Cat cat : cats) {
+            System.out.println(cat.name + " - " + (cat.satiety ? "сыт" : "голоден"));
+        }
+
+        bowl.addFood(15);
+        cats[2].eat(bowl, 8);
+
+        System.out.println("Общее количество животных: " + Animal.animalCount);
+        System.out.println("Количество собак: " + Dog.dogCount);
+        System.out.println("Количество котов: " + Cat.catCount);
+    }
+}
