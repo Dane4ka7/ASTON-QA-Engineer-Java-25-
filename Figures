@@ -1,0 +1,107 @@
+interface Shape {
+    double getPerimeter();
+
+    double getArea();
+
+    default void printDetails() {
+        if (this instanceof ColoredShape) {
+            ColoredShape shape = (ColoredShape) this;
+            System.out.println("Периметр: " + getPerimeter());
+            System.out.println("Площадь: " + getArea());
+            System.out.println("Цвет заливки: " + shape.getFillColor());
+            System.out.println("Цвет границы: " + shape.getBorderColor());
+        }
+    }
+}
+
+abstract class ColoredShape implements Shape {
+    String fillColor;
+    String borderColor;
+
+    ColoredShape(String fillColor, String borderColor) {
+        this.fillColor = fillColor;
+        this.borderColor = borderColor;
+    }
+
+    String getFillColor() {
+        return fillColor;
+    }
+
+    String getBorderColor() {
+        return borderColor;
+    }
+}
+
+class Circle extends ColoredShape {
+    double radius;
+
+    Circle(double radius, String fillColor, String borderColor) {
+        super(fillColor, borderColor);
+        this.radius = radius;
+    }
+
+    public double getPerimeter() {
+        return 2 * 3.14 * radius;
+    }
+
+    public double getArea() {
+        return 3.14 * radius * radius;
+    }
+}
+
+class Rectangle extends ColoredShape {
+    double width, height;
+
+    Rectangle(double width, double height, String fillColor, String borderColor) {
+        super(fillColor, borderColor);
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getPerimeter() {
+        return 2 * (width + height);
+    }
+
+    public double getArea() {
+        return width * height;
+    }
+}
+
+class Triangle extends ColoredShape {
+    double a, b, c;
+
+    Triangle(double a, double b, double c, String fillColor, String borderColor) {
+        super(fillColor, borderColor);
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public double getPerimeter() {
+        return a + b + c;
+    }
+
+    public double getArea() {
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5, "Красный", "Черный");
+        Rectangle rectangle = new Rectangle(4, 6, "Синий", "Зеленый");
+        Triangle triangle = new Triangle(3, 4, 5, "Желтый", "Фиолетовый");
+
+        System.out.println("Круг:");
+        circle.printDetails();
+        System.out.println();
+
+        System.out.println("Прямоугольник:");
+        rectangle.printDetails();
+        System.out.println();
+
+        System.out.println("Треугольник:");
+        triangle.printDetails();
+    }
+}
